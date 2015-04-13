@@ -11,13 +11,19 @@
 |
 */
 
-Route::get('/', 'WelcomeController@index');
-
-Route::get('home', 'HomeController@index');
-
-Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
-]);
+//Route::get('/', 'WelcomeController@index');
+//
+//Route::get('home', 'HomeController@index');
+//
+//Route::controllers([
+//	'auth' => 'Auth\AuthController',
+//	'password' => 'Auth\PasswordController',
+//]);
 
 Route::post('userAdd','UserController@userAdd');
+
+Route::get('userList','UserController@userList');
+
+Route::get('lockUserList','UserController@lockUserList');
+
+Route::get('mainInform','informController@informGet');
