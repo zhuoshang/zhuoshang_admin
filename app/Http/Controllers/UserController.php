@@ -99,7 +99,7 @@ class UserController extends Controller{
 
         $userData = array();
         foreach($userLists as $key=>$list){
-            $userData[$key]['list'] = array(
+            $userData['list'][$key] = array(
                 'id'=>$list->frontUser->front_uid,
                 'phoneNum'=>$list->frontUser->mobile,
                 'userName'=>$list->frontUser->real_name,
@@ -138,14 +138,31 @@ class UserController extends Controller{
         foreach($userLists as $list){
             $front = $list->frontUser;
             if(is_object($front)){
-                $userData[] = array(
+                $userData['lock_list'][] = array(
                     'phoneNum'=>$front->mobile,
                     'userName'=>$front->real_name,
             );
             }
         }
 
-        
+        $userUpdate = array();
+        $updateList = FrontUser::orderBy('updated_at','DESC')
+            ->take(5)
+            ->skip(0)
+            ->get();
+        foreach($updateList as $list){
+            if($list != ''){
+                $userUpdate[] = array(
+                    'id'=>$list->front_uid,
+                    'phoneNum'=>$list->mobile,
+                    'userName'=>$list->real_name
+                );
+            }
+        }
+
+
+        $userData['update'] = $userUpdate;
+
         echo json_encode(array(
             'status'=>200,
             'msg'=>'ok',
