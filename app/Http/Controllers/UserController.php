@@ -99,6 +99,10 @@ class UserController extends Controller{
 
         $userData = array();
         foreach($userLists as $key=>$list){
+            if($list->frontUser == ''){
+                continue;
+            }
+            
             $userData['list'][$key] = array(
                 'id'=>$list->frontUser->front_uid,
                 'phoneNum'=>$list->frontUser->mobile,
