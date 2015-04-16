@@ -27,3 +27,5 @@ Route::get('userList','UserController@userList');
 Route::get('lockUserList','UserController@lockUserList');
 
 Route::get('mainInform','informController@informGet');
+
+Route::post('adminAdd','adminController@adminAdd');
