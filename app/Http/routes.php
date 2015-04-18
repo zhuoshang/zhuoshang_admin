@@ -34,6 +34,8 @@ Route::post('loginAjax','adminController@adminLogin');
 
 Route::get('loginPage','adminController@adminLoginPage');
 
+Route::post('activityAdd',array('before'=>'loginCheck','uses'=>'ActivityController@activityAdd'));
+
 
 
 #登录验证

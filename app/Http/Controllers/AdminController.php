@@ -30,7 +30,7 @@ class AdminController extends Controller{
         if($this->accountCheck($name)){
             $this->throwERROE(501,'该用户名已经存在');
         }
-        
+
         $admin = new Admin();
         $user = new User();
 
