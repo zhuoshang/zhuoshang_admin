@@ -20,12 +20,29 @@
 //	'password' => 'Auth\PasswordController',
 //]);
 
-Route::post('userAdd','UserController@userAdd');
+Route::post('userAdd',array('before'=>'loginCheck','uses'=>'UserController@userAdd'));
 
-Route::get('userList','UserController@userList');
+Route::get('userList',array('before'=>'loginCheck','uses'=>'UserController@userList'));
 
-Route::get('lockUserList','UserController@lockUserList');
+Route::get('lockUserList',array('before'=>'loginCheck','uses'=>'UserController@lockUserList'));
 
-Route::get('mainInform','informController@informGet');
+Route::get('mainInform',array('before'=>'loginCheck','uses'=>'informController@informGet'));
 
-Route::post('adminAdd','adminController@adminAdd');
+Route::post('adminAdd',array('before'=>'loginCheck','uses'=>'adminController@adminAdd'));
+
+Route::post('loginAjax','adminController@adminLogin');
+
+Route::get('loginPage','adminController@adminLoginPage');
+
+
+
+#登录验证
+Route::filter('loginCheck', function()
+{
+
+    if (!\Auth::check())
+    {
+        return Redirect::to('loginPage');
+
+    }
+});

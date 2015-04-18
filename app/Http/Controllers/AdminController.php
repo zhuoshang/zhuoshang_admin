@@ -10,10 +10,14 @@ use App\FrontUser;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Auth;
 
 
 class AdminController extends Controller{
 
+    /*
+     * 添加管理员
+     **/
     public function adminAdd(Request $request){
 
         $name = $request->input('name');
@@ -43,9 +47,56 @@ class AdminController extends Controller{
         }
     }
 
+    public function adminLoginPage(){
+        echo "This is the login page";
+    }
+
     /*
- *  获取客户端ip地址
- **/
+     * 管理员登录API
+     **/
+    public function adminLogin(Request $request){
+        $name = $request->name;
+        $password = $request->password;
+
+        $adminCheck = $this->accountCheck($name);
+        if(!$adminCheck){
+            $this->throwERROE(500,'账号不存在');
+        }
+
+        if(!Hash::check($password,$adminCheck->user->password)){
+            $this->throwERROE(501,'密码验证失败');
+        }
+
+        Auth::login($adminCheck);
+
+        echo json_encode(array(
+            'status'=>200,
+            'msg'=>'ok',
+            'data'=>''
+        ));
+
+
+    }
+
+
+    /*
+     * 管理员账号验证
+     **/
+    private function accountCheck($name){
+        $adminCheck = Admin::where('name','=',$name)->first();
+
+        if($adminCheck == ''){
+            return false;
+        }
+
+        return $adminCheck;
+    }
+
+
+
+    /*
+    *  获取客户端ip地址
+    **/
     private function getIP(){
         if(!empty($_SERVER["HTTP_CLIENT_IP"])){
             $cip = $_SERVER["HTTP_CLIENT_IP"];
@@ -64,8 +115,8 @@ class AdminController extends Controller{
 
 
     /*
-* 抛错函数
-**/
+    * 抛错函数
+    **/
     private function throwERROE($code,$msg){
         echo json_encode(array(
             'status'=>$code,
@@ -75,4 +126,6 @@ class AdminController extends Controller{
 
         exit();
     }
+
+
 }
