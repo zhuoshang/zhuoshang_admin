@@ -24,6 +24,13 @@ class AdminController extends Controller{
         $password = $request->input('password');
         $level = $request->input('level');
 
+        if(Auth::user()->level != 2){
+            $this->throwERROE(500,'你无权进行此项操作');
+        }
+        if($this->accountCheck($name)){
+            $this->throwERROE(501,'该用户名已经存在');
+        }
+        
         $admin = new Admin();
         $user = new User();
 
@@ -35,6 +42,7 @@ class AdminController extends Controller{
 
         $admin->name = $name;
         $admin->uid = $user->id;
+        $admin->level = $level;
 
         if($admin->save()){
             echo json_encode(array(
