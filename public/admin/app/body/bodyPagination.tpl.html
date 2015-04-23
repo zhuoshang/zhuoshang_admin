@@ -1,0 +1,36 @@
+<div class="panel panel-default panel-custom">
+  <div class="panel-heading clearfix">
+    <span>全部用户陈列表</span>
+  </div>
+  <div class="panel-body">
+    <table>
+      <thead>
+        <tr class="trow-odd">
+          <td>手机</td>
+          <td>姓名</td>
+          <td>创建人</td>
+          <td>修改次数</td>
+          <td>{{path === 'removeUser' ? '删除' : '添加修改'}}</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="list in userList.list" ng-class="{'trow-odd' : $index % 2}">
+          <td>{{list.phoneNum}}</td>
+          <td>{{list.userName}}</td>
+          <td>{{list.creater}}</td>
+          <td>{{list.modifyCount}}</td>
+          <td><i ng-class="{true : 'fa fa-remove', false : 'fa fa-cloud-download' }[path === 'removeUser']"></i>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot></tfoot>
+    </table>
+  </div>
+  <div class="panel-foot">
+    <div class="pull-left">Showing {{currentPage * 10 - 9}} to {{currentPage * 10}} of <span class="total">{{pageCount * 10}}</span> entries</div>
+    <div class="pull-right">
+      <div id="page"></div>
+    </div>
+    <div style="clear:both"></div>
+  </div>
+</div>

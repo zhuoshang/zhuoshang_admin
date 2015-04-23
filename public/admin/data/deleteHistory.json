@@ -1,0 +1,12 @@
+{
+    "data": [
+        {
+            "avatar": "xxx/xxx.jpg",
+            "userName": "王思聪",
+            "isAdmin": 1,
+            "phoneNum": 18888888888
+        }
+    ],
+    "msg": "ok",
+    "status": 200
+}

@@ -1,0 +1,38 @@
+<div class="row" body-header></div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default panel-addAdmin">
+      <div class="panel-heading clearfix">
+        <span class="heading-text">添加管理员</span>
+      </div>
+      <div class="panel-body">
+        <form class="form-horizontal" name="registAdmin" ng-submit="submit()">
+          <fieldset>
+            <div id="legend" class="">
+              <legend class="">表单名</legend>
+            </div>
+            <div class="input-group" ng-class="{'ng-invalid': registAdmin.username.$invalid && registAdmin.username.$dirty && !registAdmin.username.$focused}">
+              <!-- Text input-->
+              <label class="input-group-addon">用户名</label>
+              <input type="text" required placeholder="Username" class="form-control" name="username" ng-model="regist.name" ng-minlength=3 ng-maxlength=11>
+            </div>
+            <div class="input-group" ng-class="{'ng-invalid': registAdmin.password.$invalid && registAdmin.password.$dirty && !registAdmin.password.$focused}">
+              <!-- Text input-->
+              <label class="input-group-addon">注册密码</label>
+              <input type="text" placeholder="Password" class="form-control" name="password" ng-model="regist.password">
+            </div>
+            <div class="input-group">
+              <label class="input-group-addon user-type">用户类型</label>
+              <input type="radio" value="1" name="level" checked="checked" ng-model="regist.level"> 普通管理员
+              <input type="radio" value="2" name="level" ng-model="regist.level"> 超级管理员
+            </div>
+            <div class="input-group">
+              <button class="btn btn-info" type="submit">提交</button>
+            </div>
+            <div style="clear:both"></div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

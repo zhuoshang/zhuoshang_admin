@@ -1,0 +1,25 @@
+{
+    "data": {
+        "tMsgCount": 32,
+        "tList": [
+            {
+                "userName": "xxx",
+                "phoneNum": 18888888888,
+                "bondName": "xxx",
+                "bondId": 3214
+            }
+        ],
+        "aMsgCount": 32,
+        "aList": [
+            {
+                "userName": "xxx",
+                "phoneNum": 18888888888,
+                "bondName": "xxx",
+                "bondLoading": 80,
+                "bondId": 3214
+            }
+        ]
+    },
+    "msg": "ok",
+    "status": 200
+}

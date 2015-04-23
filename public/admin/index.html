@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>博尚鸿翼后台管理系统</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="app/app.css" />
+    <link rel="stylesheet" type="text/css" href="vendor/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="vendor/metisMenu/dist/metisMenu.min.css">
+    <script type="text/javascript" src="vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+    </script>
+    <!--[if lt IE 9]>
+    <script src="../vendor/html5shiv/dist/html5shiv.min.js"></script>
+    <script src="../vendor/excanvas/silverlight/excanvas.js"></script>
+    <style>
+      g_vml_\:shape {
+        behavior: url(#default#VML);
+      }
+      g_vml_\:stroke {
+        behavior: url(#default#VML);
+      }
+      </style>
+  <![endif]-->
+    <title></title>
+</head>
+
+<body ng-controller="CtrlApp" class="{{lang}}">
+    <div id="wrapper">
+        <div ui-view="header"></div>
+        <div ui-view="nav"></div>
+        <div ui-view="body" id="page-wrapper"></div>
+    </div>
+    <script type="text/javascript" src="vendor/requirejs/require.js"></script>
+    <script type="text/javascript" src="app/main.js"></script>
+</body>
+
+</html>
