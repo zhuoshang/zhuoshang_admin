@@ -1,0 +1,12 @@
+{
+    "data": {
+        "userName": "xxx",
+        "isSuperAdmin": false,
+        "phoneNum": 18888888888,
+        "intro": "fdsafdsafdsa",
+        "avatar": "xxx/xxx.jpg",
+        "lastLogin": 1428762835624
+    },
+    "msg": "ok",
+    "status": 200
+}

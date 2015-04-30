@@ -1,0 +1,113 @@
+<nav class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle pull-left margin left" data-toggle="collapse" data-target=".sidebar-collapse">
+      <span class="sr-only">切换导航</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="/admin/html">
+      <img src="images/logo.png" />
+    </a>
+  </div>
+  <ul class="nav navbar-top-links navbar-right hidden-xs">
+    <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        <i class="fa fa-tasks fa-fw"></i>
+        <span class="badge badge-notification badge-danger animated fadeIn">3</span>
+      </a>
+      <ul class="dropdown-menu dropdown-tasks animated fadeInUp">
+        <li class="dropdown-header text-center">You have 3 Tasks alerts</li>
+        <li>
+          <a href="#">
+            <div>
+              <p>
+                <strong>Deadline on ACME</strong>
+                <span class="pull-right text-muted">40%</span>
+              </p>
+              <div class="progress progress-bar-mini progress-striped active">
+                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                  <span class="sr-only">40% (success)</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </li>
+        <li class="divider"></li>
+        <li class="dropdown-footer">
+          <a class="text-center" href="#">
+            <strong>See All Tasks</strong>
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        <i class="fa fa-bell fa-fw"></i> <span class="badge badge-notification badge-info animated fadeIn">3</span>
+      </a>
+      <ul class="dropdown-menu dropdown-alerts animated fadeInUp">
+        <li>
+          <a href="#">
+            <div>
+              <i class="fa fa-comment fa-fw"></i> New Comment
+              <span class="pull-right text-muted small">4 minutes ago</span>
+            </div>
+          </a>
+        </li>
+        <li class="divider"></li>
+        <li>
+          <a href="#">
+            <div>
+              <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+              <span class="pull-right text-muted small">12 minutes ago</span>
+            </div>
+          </a>
+        </li>
+        <li class="divider"></li>
+        <li>
+          <a class="text-center" href="#">
+            <strong>See All Alerts</strong>
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <!-- adminInfo -->
+    <li class="dropdown">
+      <a class="dropdown-toggle user" data-toggle="dropdown" href="#">
+                      {{adminInfo.userName}}
+                      <img ng-src="./images/default.jpg" width="25" class="img-responsive img-circle user-img">
+                      <i class="fa fa-angle-down"></i>
+                  </a>
+      <ul class="dropdown-menu dropdown-user animated fadeInUp">
+        <li>
+          <div class="media">
+            <a class="pull-left" href="#">
+              <img class="media-object user-profile-image img-circle" ng-src="./images/default.jpg">
+            </a>
+            <div class="media-body">
+              <h4 class="media-heading">{{adminInfo.userName}}<small> {{adminInfo.isSuperAdmin | isSuperAdmin}}</small></h4>
+              <h5>{{adminInfo.intro}} {{adminInfo.phoneNum}}</h5>
+              <hr style="margin:8px auto">
+            </div>
+          </div>
+        </li>
+        <li class="divider"></li>
+        <li><a href="#"><i class="fa fa-tasks"></i> Tasks <span class="badge badge-info pull-right">6 new</span></a>
+        </li>
+        <li><a href="#"><i class="fa fa-envelope"></i> Messages <span class="badge badge-info pull-right">4 new</span></a>
+        </li>
+        <li class="divider"></li>
+        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+        </li>
+      </ul>
+      <!-- /.dropdown-adminInfo -->
+    </li>
+    <li class="dropdown">
+      <a class="dropdown-toggle user" href="#">
+                          安全退出
+                  </a>
+    </li>
+  </ul>
+</nav>

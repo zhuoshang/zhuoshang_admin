@@ -1,0 +1,35 @@
+<div class="panel panel-default panel-side">
+  <div class="panel-heading clearfix">
+    <span>{{path === 'removeUser' ? '最近删除用户' : '最近修改用户'}}</span>
+  </div>
+  <div class="panel-body">
+    <div class="input-group custom-search-form">
+      <input type="text" class="form-control" placeholder="请输入手机号搜索用户">
+      <span class="input-group-btn">
+        <button class="btn btn-inverse" type="button">
+          <i class="fa fa-search"></i>
+        </button>
+      </span>
+    </div>
+    <div class="divider"></div>
+    <div ng-repeat="list in searchList">
+      <div class="delete-history">
+        <div class="history-list clearfix">
+          <span class="user-img pull-left">
+            <img src="{{list.avatar}}" alt="User Avatar" width="50" height="50"  class="img-responsive img-circle" />
+          </span>
+          <div class="list-body clearfix">
+            <div class="header">
+              <strong>{{list.userName}}</strong>
+            </div>
+            <div class="content">
+              <strong>{{list.phoneNum}}</strong>
+            </div>
+          </div>
+          <a ng-if="path === 'removeUser'" class="delete-cancel" href="#">撤销删除</a>
+        </div>
+      </div>
+      <div class="divider"></div>
+    </div>
+  </div>
+</div>

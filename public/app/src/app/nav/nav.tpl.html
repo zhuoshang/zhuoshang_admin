@@ -1,0 +1,101 @@
+<nav id="menu" class="navbar-default navbar-static-side hidden-xs" role="navigation">
+  <div class="sidebar-collapse">
+    <ul class="nav" id="side-menu">
+      <li class="sidebar-user">
+        <div class="user-img">
+          <img src="./images/default.jpg" width="65" height="65" class="img-responsive img-circle animated bounceIn">
+        </div>
+        <div class="user-info">
+          <div class="user-greet">欢迎</div>
+          <div class="user-name">{{adminInfo.userName}}</div>
+          <div class="user-status animated bounceInLeft">
+            <span class="label label-success dropdown-toggle">在线</span>
+          </div>
+        </div>
+      </li>
+      <li class="sidebar-search">
+        <div class="input-group custom-search-form">
+          <input type="text" class="form-control" placeholder="Quick Search...">
+          <span class="input-group-btn">
+                              <button class="btn btn-inverse" type="button">
+                                  <i class="fa fa-search"></i>
+                              </button>
+                          </span>
+        </div>
+        <!-- /input-group -->
+      </li>
+      <li class="">
+        <a href="#"><i class="fa fa-suitcase fa-fw"></i> 贸易中心 <span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level collapse" style="height: 0px;">
+          <li>
+            <a href="#">可选基金</a>
+          </li>
+          <li>
+            <a href="#">不可选基金</a>
+          </li>
+          <li>
+            <a href="#">用户资产管理</a>
+          </li>
+        </ul>
+        <!-- /.nav-second-level -->
+      </li>
+      <li class="">
+        <a href="#"><i class="fa fa-group fa-fw"></i> 用户中心 <span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level collapse" style="height: 0px;">
+          <li>
+            <a ui-sref="allUser">全部用户</a>
+          </li>
+          <li>
+            <a ui-sref="addUser">添加用户</a>
+          </li>
+          <li>
+            <a ui-sref="removeUser">删除用户</a>
+          </li>
+        </ul>
+        <!-- /.nav-second-level -->
+      </li>
+      <li class="">
+        <a href="#"><i class="fa fa-money fa-fw"></i> 基金中心 <span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level collapse" style="height: 0px;">
+          <li>
+            <a href="#">全部基金</a>
+          </li>
+          <li>
+            <a href="#">添加基金</a>
+          </li>
+          <li>
+            <a href="#">删除基金</a>
+          </li>
+        </ul>
+        <!-- /.nav-second-level -->
+      </li>
+      <li class="">
+        <a href="#"><i class="fa fa-qrcode fa-fw"></i> 活动中心 <span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level collapse" style="height: 0px;">
+          <li>
+            <a href="#">全部活动</a>
+          </li>
+          <li>
+            <a ui-sref="addActivity">添加活动</a>
+          </li>
+          <li>
+            <a href="#">删除活动</a>
+          </li>
+        </ul>
+        <!-- /.nav-second-level -->
+      </li>
+      <li class="">
+        <a href="#"><i class="fa fa-cogs fa-fw"></i> 管理员中心 <span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level collapse" style="height: 0px;">
+          <li>
+            <a ui-sref="addAdmin">添加管理员</a>
+          </li>
+        </ul>
+        <!-- /.nav-second-level -->
+      </li>
+    </ul>
+  </div>
+</nav>
+<script>
+  $('#side-menu').metisMenu();
+</script>

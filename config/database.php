@@ -55,9 +55,9 @@ return [
         'mysql' => [
             'driver'    => 'mysql',
             'host'      => '127.0.0.1',
-            'database'  => 'boshang',
-            'username'  => 'tianling',
-            'password'  => '887976',
+            'database'  => 'debt',
+            'username'  => 'root',
+            'password'  => '',
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',

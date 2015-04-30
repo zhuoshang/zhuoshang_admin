@@ -1,0 +1,36 @@
+<!-- 模态框（Modal） -->
+<div class="modal show in" id="loginBox">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close">
+          &times;
+        </button>
+        <h4 class="modal-title">
+               登陆
+            </h4>
+      </div>
+      <form name="loginForm" novalidate ng-submit="submit(loginForm)">
+        <div class="modal-body">
+          <div class="input-group">
+            <!-- Text input-->
+            <label class="input-group-addon" for="loginName">用户名</label>
+            <input type="text" placeholder="请输入账户，长度3~11" class="form-control" id="loginName" name="name" ng-model="login.name" required ng-maxLength="11" ng-minLength="3">
+          </div>
+          <div class="input-group">
+            <!-- Text input-->
+            <label class="input-group-addon" for="loginPsw">密码</label>
+            <input type="password" placeholder="请输入账户，长度8~16" class="form-control" id="loginPsw" name="password" ng-model="login.password" required ng-minlength="6" ng-maxlength="16">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-info">
+            提交更改
+          </button>
+        </div>
+      </form>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal -->
+</div>
