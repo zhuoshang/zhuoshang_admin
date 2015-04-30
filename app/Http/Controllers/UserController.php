@@ -82,6 +82,70 @@ class UserController extends Controller{
 
     }
 
+
+    /*
+     * 修改用户数据
+     **/
+    public function userUpdate(Request $request){
+        $realname = $request->input('userName');
+        $mobile = $request->input('phoneNum');
+        $address = $request->input('address');
+        $gender = $request->input('gender');
+        $monthlyIncome = $request->input('monthlyIncome');
+        $companyIndustry = $request->input('companyIndustry');
+        $companyScale = $request->input('companyScale');
+        $userJob = $request->input('userJob');
+        $userIntro = $request->input('userIntro');
+        $aboutUser = $request->input('aboutUser');
+
+        $uid = $request->input('uid');
+        $front_user = FrontUser::find($uid);
+        if($front_user == ''){
+            $this->throwERROE(500,'该用户不存在');
+        }
+
+
+        $check = $this->infoCheck($realname,$mobile);
+        if(!$check){
+            echo json_encode(array(
+                'status'=>'501',
+                'msg'=>'关键数据为空或输入不合法'
+            ));
+
+            exit();
+        }
+
+        $front_user->real_name = $realname;
+        $front_user->mobile = $mobile;
+        $front_user->address = $address;
+        $front_user->gender = $gender;
+        $front_user->monthlyIncome = $monthlyIncome;
+        $front_user->companyIndustry = $companyIndustry;
+        $front_user->companyScale = $companyScale;
+        $front_user->userJob = $userJob;
+        $front_user->userIntro = $userIntro;
+        $front_user->aboutUser = $aboutUser;
+
+        if($front_user->save()){
+            echo json_encode(
+                array(
+                    'status'=>'200',
+                    'msg'=>'ok'
+                )
+            );
+            exit();
+
+        }else{
+            echo json_encode(array(
+                'status'=>504,
+                'msg'=>'save error'
+            ));
+            exit();
+
+        }
+
+    }
+
     /*
      * 用户列表
      **/
@@ -188,6 +252,20 @@ class UserController extends Controller{
 
         return true;
     }
+
+    /*
+     * 抛错函数
+     **/
+    private function throwERROE($code,$msg){
+        echo json_encode(array(
+            'status'=>$code,
+            'msg'=>$msg,
+            'data'=>''
+        ));
+
+        exit();
+    }
+
 }
 
 

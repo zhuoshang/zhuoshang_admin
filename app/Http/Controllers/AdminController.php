@@ -86,6 +86,10 @@ class AdminController extends Controller{
 
     }
 
+    public function adminLogout(){
+        Auth::logout();
+    }
+
 
     /*
      * 管理员账号验证

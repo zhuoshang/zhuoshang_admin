@@ -11,6 +11,11 @@ class Activity extends Model{
 
     protected $table = 'activity';
 
+    public function pic(){
+        return $this->hasMany('App\activityPic','aid','id');
+    }
+
+
 
 }
 

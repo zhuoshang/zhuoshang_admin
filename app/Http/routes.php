@@ -36,6 +36,9 @@ Route::get('loginPage','adminController@adminLoginPage');
 
 Route::post('activityAdd',array('before'=>'loginCheck','uses'=>'ActivityController@activityAdd'));
 
+Route::post('charityAdd',array('before'=>'loginCheck','uses'=>'ActivityController@charityAdd'));
+
+Route::post('userUpdate',array('before'=>'loginCheck','uses'=>'UserController@userUpdate'));
 
 
 #登录验证
