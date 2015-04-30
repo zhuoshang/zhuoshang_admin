@@ -211,6 +211,7 @@ class UserController extends Controller{
             $front = $list->frontUser;
             if(is_object($front)){
                 $userData['lock_list'][] = array(
+                    'id'=>$list->front_uid,
                     'phoneNum'=>$front->mobile,
                     'userName'=>$front->real_name,
             );
