@@ -25,6 +25,7 @@ class UserController extends Controller{
         $userJob = $request->input('userJob');
         $userIntro = $request->input('userIntro');
         $aboutUser = $request->input('aboutUser');
+        $idCard = $request->input('idCard');
 
 
         $check = $this->infoCheck($realname,$mobile);
@@ -60,6 +61,7 @@ class UserController extends Controller{
         $front_user->userJob = $userJob;
         $front_user->userIntro = $userIntro;
         $front_user->aboutUser = $aboutUser;
+        $front_user->idCard = $idCard;
 
 
        if($front_user->save()){
@@ -97,6 +99,7 @@ class UserController extends Controller{
         $userJob = $request->input('userJob');
         $userIntro = $request->input('userIntro');
         $aboutUser = $request->input('aboutUser');
+        $idCard = $request->input('idCard');
 
         $uid = $request->input('uid');
         $front_user = FrontUser::find($uid);
@@ -125,6 +128,7 @@ class UserController extends Controller{
         $front_user->userJob = $userJob;
         $front_user->userIntro = $userIntro;
         $front_user->aboutUser = $aboutUser;
+        $front_user->idCard = $idCard;
 
         if($front_user->save()){
             echo json_encode(

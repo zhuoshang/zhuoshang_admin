@@ -52,12 +52,24 @@ return [
 			'prefix'   => '',
 		],
 
+//        'mysql' => [
+//            'driver'    => 'mysql',
+//            'host'      => '127.0.0.1',
+//            'database'  => 'debt',
+//            'username'  => 'root',
+//            'password'  => '',
+//            'charset'   => 'utf8',
+//            'collation' => 'utf8_unicode_ci',
+//            'prefix'    => '',
+//            'strict'    => false,
+//        ],
+
         'mysql' => [
             'driver'    => 'mysql',
             'host'      => '127.0.0.1',
-            'database'  => 'debt',
-            'username'  => 'root',
-            'password'  => '',
+            'database'  => 'boshang',
+            'username'  => 'tianling',
+            'password'  => '887976',
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',
