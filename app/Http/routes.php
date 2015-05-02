@@ -28,11 +28,11 @@ Route::get('lockUserList',array('before'=>'loginCheck','uses'=>'UserController@l
 
 Route::get('mainInform',array('before'=>'loginCheck','uses'=>'informController@informGet'));
 
-Route::post('adminAdd',array('before'=>'loginCheck','uses'=>'adminController@adminAdd'));
+Route::post('adminAdd',array('before'=>'loginCheck','uses'=>'AdminController@adminAdd'));
 
-Route::post('loginAjax','adminController@adminLogin');
+Route::post('loginAjax','AdminController@adminLogin');
 
-Route::get('loginPage','adminController@adminLoginPage');
+Route::get('loginPage','AdminController@adminLoginPage');
 
 Route::post('activityAdd',array('before'=>'loginCheck','uses'=>'ActivityController@activityAdd'));
 
