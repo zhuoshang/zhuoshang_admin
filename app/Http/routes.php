@@ -40,6 +40,8 @@ Route::post('charityAdd',array('before'=>'loginCheck','uses'=>'ActivityControlle
 
 Route::post('userUpdate',array('before'=>'loginCheck','uses'=>'UserController@userUpdate'));
 
+Route::get('userInfo',array('before'=>'loginCheck','uses'=>'UserController@getUserById'));
+
 
 #登录验证
 Route::filter('loginCheck', function()

@@ -150,6 +150,7 @@ class UserController extends Controller{
 
     }
 
+
     /*
      * 用户列表
      **/
@@ -243,6 +244,54 @@ class UserController extends Controller{
         ));
 
         exit();
+    }
+
+
+
+    /*
+     * 按id查询用户
+     **/
+    public function getUserById(Request $request){
+        $uid = $request->uid;
+
+        if(!is_numeric($uid)){
+            $this->throwERROE(501,'id违法');
+        }
+
+        $user = FrontUser::find($uid);
+        if($user == ''){
+            $this->throwERROE(500,'用户不存在');
+        }
+
+        if($user->gender == 0){
+            $gender = '男';
+        }else{
+            $gender = '女';
+        }
+
+        $userData = array(
+            'uid'=>$user->front_uid,
+            'userName'=>$user->userName,
+            'phoneNum'=>$user->mobile,
+            'address'=>$user->address,
+            'email'=>$user->email,
+            'gender'=>$gender,
+            'idCard'=>$user->idCard,
+            'monthlyIncome'=>$user->monthlyIncome,
+            'company'=>$user->company,
+            'companyIndustry'=>$user->companyIndustry,
+            'companyScale'=>$user->companyScale,
+            'userJob'=>$user->userJob,
+            'userIntro'=>$user->userIntro,
+            'aboutUser'=>$user->aboutUser
+
+        );
+
+        echo json_encode(array(
+            'status'=>200,
+            'msg'=>'ok',
+            'data'=>$userData
+        ));
     }
 
 
