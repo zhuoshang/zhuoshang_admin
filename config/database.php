@@ -76,17 +76,17 @@ return [
             'strict'    => false,
         ],
 
-        'mysql' => [
-            'driver'    => 'mysql',
-            'host'      => '127.0.0.1',
-            'database'  => 'boshang',
-            'username'  => 'root',
-            'password'  => 'boshangp2p',
-            'charset'   => 'utf8',
-            'collation' => 'utf8_unicode_ci',
-            'prefix'    => '',
-            'strict'    => false,
-        ],
+//        'mysql' => [
+//            'driver'    => 'mysql',
+//            'host'      => '127.0.0.1',
+//            'database'  => 'boshang',
+//            'username'  => 'root',
+//            'password'  => 'boshangp2p',
+//            'charset'   => 'utf8',
+//            'collation' => 'utf8_unicode_ci',
+//            'prefix'    => '',
+//            'strict'    => false,
+//        ],
 
 		'pgsql' => [
 			'driver'   => 'pgsql',

@@ -42,6 +42,8 @@ Route::post('userUpdate',array('before'=>'loginCheck','uses'=>'UserController@us
 
 Route::get('userInfo',array('before'=>'loginCheck','uses'=>'UserController@getUserById'));
 
+Route::get('userSearch',array('before'=>'loginCheck','uses'=>'UserController@userSearch'));
+
 
 #登录验证
 Route::filter('loginCheck', function()

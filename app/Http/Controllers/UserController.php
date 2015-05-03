@@ -296,6 +296,36 @@ class UserController extends Controller{
 
 
 
+
+    /*
+     * 用户搜索
+     **/
+    public function userSearch(Request $request){
+        $mobile = $request->mobile;
+
+        $user = FrontUser::where('mobile','=',$mobile)->first();
+        if($user == ''){
+            $this->throwERROE(500,'用户不存在');
+        }
+
+        $userData = array(
+            'userName'=>$user->real_name,
+            'uid'=>$user->front_uid,
+            'phoneNum'=>$user->mobile
+        );
+
+        echo json_encode(array(
+            'status'=>200,
+            'msg'=>'ok',
+            'data'=>$userData
+        ));
+
+        exit();
+
+    }
+
+
+
     /*
      * 输入数据验证
      **/
