@@ -8,4 +8,9 @@ abstract class Controller extends BaseController {
 
 	use DispatchesCommands, ValidatesRequests;
 
+    public function __construct()
+    {
+        date_default_timezone_set('PRC');
+    }
+
 }

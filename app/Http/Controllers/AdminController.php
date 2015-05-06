@@ -15,6 +15,7 @@ use Auth;
 
 class AdminController extends Controller{
 
+
     /*
      * 添加管理员
      **/
@@ -59,6 +60,9 @@ class AdminController extends Controller{
         echo "This is the login page";
     }
 
+
+
+
     /*
      * 管理员登录API
      **/
@@ -75,6 +79,10 @@ class AdminController extends Controller{
             $this->throwERROE(501,'密码验证失败');
         }
 
+        $adminCheck->user->last_login_time = time();
+        $adminCheck->user->last_login_ip = $this->getIP();
+        $adminCheck->user->save();
+
         Auth::login($adminCheck);
 
         echo json_encode(array(
@@ -86,8 +94,79 @@ class AdminController extends Controller{
 
     }
 
+
+    /*
+     * 管理员退出API
+     **/
     public function adminLogout(){
         Auth::logout();
+
+        echo json_encode(array(
+            'status'=>200,
+            'msg'=>'ok',
+            'data'=>''
+        ));
+    }
+
+
+    /*
+     * 管理员列表
+     **/
+    public function adminList(){
+        $admins = Admin::all();
+
+        $adminData = array();
+        foreach($admins as $admin){
+
+            if($admin->level == 1){
+                $level = false;
+            }else{
+                $level = true;
+            }
+
+            $adminData[] = array(
+                'userName'=>$admin->name,
+                'uid'=>$admin->id,
+                'isSuperAdmin'=>$level,
+                'lastLogin'=>date('Y-m-d H:i:s',$admin->user->last_login_time)
+            );
+        }
+
+        echo json_encode(array(
+            'status'=>200,
+            'msg'=>'ok',
+            'data'=>$adminData
+        ));
+    }
+
+
+    /*
+     * 删除管理员
+     **/
+    public function adminDelete(Request $request){
+        if(Auth::user()->level != 2){
+            $this->throwERROE(502,'您无权执行此项操作');
+        }
+
+        $aid = $request->id;
+        if(!is_numeric($aid)){
+            $this->throwERROE(501,'id格式错误');
+        }
+
+        $admin = Admin::find($aid);
+        if($admin == ''){
+            $this->throwERROE(500,'管理员不存在');
+        }
+
+        if($admin->user->delete()){
+            echo json_encode(array(
+                'status'=>200,
+                'msg'=>'ok',
+                'data'=>''
+            ));
+
+            exit();
+        }
     }
 
 

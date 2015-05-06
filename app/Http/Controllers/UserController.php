@@ -7,6 +7,7 @@
 use App\FrontUser;
 use App\User;
 use Illuminate\Http\Request;
+use Auth;
 
 class UserController extends Controller{
 
@@ -322,6 +323,39 @@ class UserController extends Controller{
 
         exit();
 
+    }
+
+
+
+    /*
+     * 用户锁定（删除）
+     **/
+    public function userLock(Request $request){
+        $id = $request->uid;
+
+        if(!is_numeric($id)){
+            $this->throwERROE(501,'id违法');
+        }
+
+        $user = FrontUser::find($id);
+        if($user == ''){
+            $this->throwERROE(500,'该用户不存在');
+        }
+
+        $user->user->lock = 1;
+        $user->action_admin = Auth::user()->id;
+        if($user->save() && $user->user->save()){
+            echo json_encode(array(
+                'status'=>200,
+                'msg'=>'ok',
+                'data'=>''
+            ));
+
+            exit();
+
+        }else{
+            $this->throwERROE(502,'save_error');
+        }
     }
 
 

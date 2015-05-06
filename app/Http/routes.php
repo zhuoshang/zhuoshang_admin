@@ -34,6 +34,8 @@ Route::post('loginAjax','AdminController@adminLogin');
 
 Route::get('loginPage','AdminController@adminLoginPage');
 
+Route::get('logout','AdminController@adminLogout');
+
 Route::post('activityAdd',array('before'=>'loginCheck','uses'=>'ActivityController@activityAdd'));
 
 Route::post('charityAdd',array('before'=>'loginCheck','uses'=>'ActivityController@charityAdd'));
@@ -43,6 +45,12 @@ Route::post('userUpdate',array('before'=>'loginCheck','uses'=>'UserController@us
 Route::get('userInfo',array('before'=>'loginCheck','uses'=>'UserController@getUserById'));
 
 Route::get('userSearch',array('before'=>'loginCheck','uses'=>'UserController@userSearch'));
+
+Route::post('userLock',array('before'=>'loginCheck','uses'=>'UserController@userLock'));
+
+Route::get('adminAll',array('before'=>'loginCheck','uses'=>'AdminController@adminList'));
+
+Route::get('adminDelete',array('before'=>'loginCheck','uses'=>'AdminController@adminDelete'));
 
 
 #登录验证
