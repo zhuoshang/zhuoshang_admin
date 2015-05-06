@@ -208,15 +208,15 @@ class AdminController extends Controller{
     /*
     * 抛错函数
     **/
-    private function throwERROE($code,$msg){
-        echo json_encode(array(
-            'status'=>$code,
-            'msg'=>$msg,
-            'data'=>''
-        ));
-
-        exit();
-    }
+//    private function throwERROE($code,$msg){
+//        echo json_encode(array(
+//            'status'=>$code,
+//            'msg'=>$msg,
+//            'data'=>''
+//        ));
+//
+//        exit();
+//    }
 
 
 }

@@ -52,6 +52,10 @@ Route::get('adminAll',array('before'=>'loginCheck','uses'=>'AdminController@admi
 
 Route::get('adminDelete',array('before'=>'loginCheck','uses'=>'AdminController@adminDelete'));
 
+Route::post('picUpload',array('before'=>'loginCheck','uses'=>'PicController@picUpload'));
+
+Route::get('picDelete',array('before'=>'loginCheck','uses'=>'PicController@picDelete'));
+
 
 #登录验证
 Route::filter('loginCheck', function()

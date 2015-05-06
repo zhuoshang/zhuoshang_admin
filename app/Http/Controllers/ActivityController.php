@@ -85,6 +85,7 @@ class ActivityController extends Controller
     }
 
 
+
     /*
      * 爱心捐助添加
      **/
@@ -117,6 +118,10 @@ class ActivityController extends Controller
         }
     }
 
+
+
+
+
     /**
      * 生成服务器端存储的新文件名
      **/
@@ -136,18 +141,20 @@ class ActivityController extends Controller
 
     }
 
+
+
     /*
     * 抛错函数
     **/
-    private function throwERROE($code,$msg){
-        echo json_encode(array(
-            'status'=>$code,
-            'msg'=>$msg,
-            'data'=>''
-        ));
-
-        exit();
-    }
+//    private function throwERROE($code,$msg){
+//        echo json_encode(array(
+//            'status'=>$code,
+//            'msg'=>$msg,
+//            'data'=>''
+//        ));
+//
+//        exit();
+//    }
 
 
 
