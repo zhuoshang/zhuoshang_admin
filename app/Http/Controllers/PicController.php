@@ -171,7 +171,7 @@ class PicController extends Controller{
             $pic->url = asset('/uploads/'.$option.'/'.$directoryName.'/photo/'.$newFileName);
             $pic->absolute_url = $savePath.'/'.$newFileName;
             if($pic->save()){
-                echo json_encode(
+                echo '<script>var parent = window.parent;parent.iframeCallback('.json_encode(
                     array(
                         'status'=>200,
                         'msg'=>'ok',
@@ -180,7 +180,7 @@ class PicController extends Controller{
                             'url'=>$pic->url
                         )
                     )
-                );
+                ).');</script>';
 
                 exit();
             }
