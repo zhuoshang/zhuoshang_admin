@@ -7,6 +7,9 @@
 use App\Activity;
 use App\ActivityPic;
 use App\Charity;
+use App\CharityPic;
+use App\DebtPic;
+use App\DebtPro;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use DB;
@@ -33,13 +36,10 @@ class PicController extends Controller{
 
 
             $typeName =  $file->getClientOriginalExtension();//获取文件后缀名
-            $newFileName = $this->fileNameMake($filename,$typeName);
+            $newFileName = $this->fileNameMake($filename,$typeName);//生成新文件名
 
-            switch($option){
-                case 'activity':
-                    $this->fileSave($file,$newFileName,$option);
+            $this->fileSave($file,$newFileName,$option);
 
-            }
 
         }
     }
@@ -75,6 +75,63 @@ class PicController extends Controller{
                 }
 
                 break;
+
+            case 'charity':
+                $picture = CharityPic::find($id);
+                if($picture == ''){
+                    $this->throwERROE(501,'图片不存在');
+                }
+
+                $url = $picture->absolute_url;
+
+                if(!file_exists($url)){
+                    $this->throwERROE(502,'文件不存在');
+                }
+
+                if(unlink($url) && $picture->delete()){
+                    $this->show('ok');
+                }
+
+                break;
+
+            case 'debt':
+                $picture = DebtPic::find($id);
+                if($picture == ''){
+                    $this->throwERROE(501,'图片不存在');
+                }
+
+                $url = $picture->absolute_url;
+
+                if(!file_exists($url)){
+                    $this->throwERROE(502,'文件不存在');
+                }
+
+                if(unlink($url) && $picture->delete()){
+                    $this->show('ok');
+                }
+
+                break;
+
+            case 'debtPro':
+                $picture = DebtPro::find($id);
+                if($picture == ''){
+                    $this->throwERROE(501,'图片不存在');
+                }
+
+                $url = $picture->absolute_url;
+
+                if(!file_exists($url)){
+                    $this->throwERROE(502,'文件不存在');
+                }
+
+                if(unlink($url) && $picture->delete()){
+                    $this->show('ok');
+                }
+
+                break;
+
+            default:
+                $this->throwERROE(505,'操作不存在');
         }
     }
 
@@ -85,12 +142,32 @@ class PicController extends Controller{
      **/
     private function fileSave($file,$newFileName,$option){
 
-        $directoryName = date('Y-m-d',time());//根据用户id和100的模值，生成对应存储目录地址
+        $directoryName = date('Y-m',time());//根据用户id和100的模值，生成对应存储目录地址
         $savePath = public_path().'/uploads/'.$option.'/'.$directoryName.'/photo';
 
         $fileSave = $file -> move($savePath,$newFileName);
         if($fileSave){
-            $pic = new ActivityPic();
+            switch($option){
+                case 'activity':
+                    $pic = new ActivityPic();
+                    break;
+                case 'charity':
+                    $pic = new CharityPic();
+                    break;
+                case 'debt':
+                    $pic = new DebtPic();
+                    break;
+
+                case  'debtPro':
+                    $pic = new DebtPro();
+                    break;
+
+                default:
+                    $this->throwERROE(505,'操作不存在');
+
+            }
+
+
             $pic->url = asset('/uploads/'.$option.'/'.$directoryName.'/photo/'.$newFileName);
             $pic->absolute_url = $savePath.'/'.$newFileName;
             if($pic->save()){
