@@ -175,7 +175,10 @@ class PicController extends Controller{
                     array(
                         'status'=>200,
                         'msg'=>'ok',
-                        'data'=>array('id'=>$pic->id)
+                        'data'=>array(
+                            'id'=>$pic->id,
+                            'url'=>$pic->url
+                        )
                     )
                 );
 
