@@ -7,6 +7,7 @@
 use App\Activity;
 use App\ActivityPic;
 use App\Charity;
+use App\CharityPic;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use DB;
@@ -24,6 +25,9 @@ class ActivityController extends Controller
         $title = $request->input('title');
         $content = $request->input('content');
         $time = $request->input('time');
+        $pictures = $request->input('picture');
+        $top = $request->input('top');
+
         if($title == '' || $content == '' || !is_numeric($time)){
             $this->throwERROE(505,'数据为空或者格式非法');
         }
@@ -32,54 +36,22 @@ class ActivityController extends Controller
         $activity->title = $title;
         $activity->content = $content;
         $activity->time = $time;
+        $activity->top = $top;
 
         if(!$activity->save()){
             $this->throwERROE(502,'database save error');
         }
 
-        if($request->hasFile('picture') && $request->file('picture')->isValid()){
-            $file = $request->file('picture');
-            $filename = $file->getClientOriginalName();//获取初始文件名
-
-            //获取文件类型并进行验证
-            $filetype = $file->getMimeType();
-            $typeArray = explode('/', $filetype, 2);
-            if($typeArray['0'] != 'image'){
-                $this->throwERROE(500,'数据格式非法');
+        $pictures = json_decode($pictures);
+        foreach($pictures as $pic){
+            $picture = ActivityPic::find($pic);
+            if($picture != ''){
+                $picture->aid = $activity->id;
+                $picture->save();
             }
-
-            $typeName =  $file->getClientOriginalExtension();//获取文件后缀名
-            $aid = $activity->id;
-
-            $newFileName = $this->fileNameMake($filename,$typeName);
-            $directoryName = $aid%100;//根据用户id和100的模值，生成对应存储目录地址
-            $savePath = public_path().'/uploads/activity/'.$directoryName.'/photo';
-
-            $fileSave = $file -> move($savePath,$newFileName);
-            if($fileSave){
-                $pic = new ActivityPic();
-                $pic->aid = $aid;
-                $pic->url = asset('/uploads/activity/'.$directoryName.'/photo/'.$newFileName);
-                if($pic->save()){
-                    echo json_encode(
-                        array(
-                            'status'=>200,
-                            'msg'=>'ok',
-                            'data'=>''
-                        )
-                    );
-
-                    exit();
-                }
-            }else{
-                $this->throwERROE(504,'pic_save_error');
-            }
-
         }
 
-        if($title == '' || $content == '' || !is_numeric($time)){
-            $this->throwERROE(501,'关键数据为空或者参数不合法');
-        }
+        $this->show('ok');
 
 
     }
@@ -94,6 +66,8 @@ class ActivityController extends Controller
         $title = $request->input('title');
         $content = $request->input('content');
         $time = $request->input('time');
+        $pictures = $request->input('picture');
+        $top = $request->input('top');
 
         if($title == '' || $content == '' || !is_numeric($time)){
             $this->throwERROE(501,'关键数据为空或者参数不合法');
@@ -103,8 +77,19 @@ class ActivityController extends Controller
         $charity->title = $title;
         $charity->content = $content;
         $charity->time = $time;
+        $charity->top = $top;
 
         if($charity->save()){
+
+            $pictures = json_decode($pictures);
+            foreach($pictures as $pic){
+                $picture = CharityPic::find($pic);
+                if($picture != ''){
+                    $picture->cid = $charity->id;
+                    $picture->save();
+                }
+            }
+
             echo json_encode(array(
                 'status'=>200,
                 'msg'=>'ok',
