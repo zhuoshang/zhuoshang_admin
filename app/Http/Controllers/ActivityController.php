@@ -223,6 +223,44 @@ class ActivityController extends Controller
 
 
 
+    /*
+     * 贵宾优享及爱心捐助删除
+     **/
+    public function acDelete(Request $requset){
+        $option = $requset->option;
+        $id = $requset->id;
+
+        if(!is_numeric($id)){
+            $this->throwERROE(501,'id违法');
+        }
+
+        if($option == 'activity'){
+            $activity = Activity::find($id);
+            if($activity == ''){
+                $this->throwERROE(500,'id不存在');
+
+            }
+
+            if($activity->delete()){
+                $this->show('ok');
+            }
+
+        }elseif($option == 'charity'){
+            $charity = Charity::find($id);
+            if($charity == ''){
+                $this->throwERROE(500,'id不存在');
+            }
+
+            if($charity->delete()){
+                $this->show('ok');
+            }
+
+        }else{
+            $this->throwERROE(502,'操作不存在');
+        }
+    }
+
+
     /**
      * 生成服务器端存储的新文件名
      **/
