@@ -38,7 +38,11 @@ Route::get('logout','AdminController@adminLogout');
 
 Route::post('activityAdd',array('before'=>'loginCheck','uses'=>'ActivityController@activityAdd'));
 
+Route::get('activityContent',array('before'=>'loginCheck','uses'=>'ActivityController@activityContent'));
+
 Route::post('charityAdd',array('before'=>'loginCheck','uses'=>'ActivityController@charityAdd'));
+
+Route::get('charityContent',array('before'=>'loginCheck','uses'=>'ActivityController@charityContent'));
 
 Route::post('userUpdate',array('before'=>'loginCheck','uses'=>'UserController@userUpdate'));
 
