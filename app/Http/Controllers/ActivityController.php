@@ -104,6 +104,50 @@ class ActivityController extends Controller
     }
 
 
+    /*
+    * 爱心捐赠列表
+    **/
+    public function charityList(){
+        $charityList = Charity::orderBy('created_at','DESC')->get();
+
+        $charityData = array();
+        foreach($charityList as $list){
+
+
+            $begin = strtotime($list->created_at);
+            $end = strtotime($list->created_at) + $list->time*60*60*24;
+
+            $now = time();
+            if(($now - $begin)/60/60/24 < $list->time){
+                $status = 1;
+            }else{
+                $status = 0;
+            }
+
+            $charityData[] = array(
+                'id'=>$list->id,
+                'title'=>$list->title,
+                'begin'=>date('Y-m-d',$begin),
+                'end'=>date('Y-m-d',$end),
+                'status'=>$status
+
+            );
+
+
+        }
+
+        echo json_encode(
+            array(
+                'status'=>200,
+                'msg'=>'ok',
+                'data'=>$charityData
+            )
+        );
+
+        exit();
+    }
+
+
 
     /*
     * 贵宾优享详情查询
@@ -145,9 +189,10 @@ class ActivityController extends Controller
         );
 
         if($activityData->pic != ''){
-            foreach($activityData->pic as $picture){
+            foreach($activityData->pic as $key=>$picture){
                 if($picture->isbanner == 0){
-                    $contentData['pic'][] = asset($picture->url);
+                    $contentData['pic'][$key]['url'] = asset($picture->url);
+                    $contentData['pic'][$key]['isBanner'] = $picture->isbanner;
                 }
             }
         }
@@ -205,9 +250,10 @@ class ActivityController extends Controller
         );
 
         if($charityData->pic != ''){
-            foreach($charityData->pic as $picture){
+            foreach($charityData->pic as $key=>$picture){
                 if($picture->isbanner == 0){
-                    $charityContent['pic'][] = $picture->url;
+                    $charityContent['pic'][$key]['url'] = $picture->url;
+                    $charityContent['pic'][$key]['isBanner'] = $picture->isbanner;
                 }
             }
         }

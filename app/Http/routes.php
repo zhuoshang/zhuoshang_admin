@@ -42,6 +42,8 @@ Route::get('activityContent',array('before'=>'loginCheck','uses'=>'ActivityContr
 
 Route::post('charityAdd',array('before'=>'loginCheck','uses'=>'ActivityController@charityAdd'));
 
+Route::get('charityList',array('before'=>'loginCheck','uses'=>'ActivityController@charityList'));
+
 Route::get('charityContent',array('before'=>'loginCheck','uses'=>'ActivityController@charityContent'));
 
 Route::get('acDelete',array('before'=>'loginCheck','uses'=>'ActivityController@acDelete'));
