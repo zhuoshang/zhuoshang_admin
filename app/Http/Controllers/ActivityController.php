@@ -148,6 +148,52 @@ class ActivityController extends Controller
     }
 
 
+    /*
+    * 贵宾优享列表
+    **/
+    public function activityList(){
+
+        $activityList = Activity::orderBy('created_at','DESC')->get();
+
+        $activityData = array();
+        foreach($activityList as $list){
+
+            $begin = strtotime($list->created_at);
+            $end = strtotime($list->created_at) + $list->time*60*60*24;
+
+            $now = time();
+            if(($now - $begin)/60/60/24 < $list->time){
+                $status = 1;
+            }else{
+                $status = 0;
+            }
+
+            $activityData[] = array(
+                'id'=>$list->id,
+                'title'=>$list->title,
+                'begin'=>date('Y-m-d',$begin),
+                'end'=>date('Y-m-d',$end),
+                'status'=>$status,
+                'time'=>$list->time
+
+            );
+
+
+        }
+
+        echo json_encode(
+            array(
+                'status'=>200,
+                'msg'=>'ok',
+                'data'=>$activityData
+            )
+        );
+
+        exit();
+
+    }
+
+
 
     /*
     * 贵宾优享详情查询
@@ -305,6 +351,67 @@ class ActivityController extends Controller
             $this->throwERROE(502,'操作不存在');
         }
     }
+
+
+
+    /*
+     * 贵宾优享及爱心捐助修改
+     **/
+    public function acUpdate(Request $request){
+        $option = $request->option;
+        $id = $request->input('id');
+        $title = $request->input('title');
+        $content = $request->input('content');
+        $time = $request->input('time');
+        $pictures = $request->input('picture');
+        $top = $request->input('top');
+
+        if(!is_numeric($id)){
+            $this->throwERROE(500,'id违法');
+        }
+
+        if($option == 'activity'){
+            $model = Activity::find($id);
+        }elseif($option == 'charity'){
+            $model = Charity::find($id);
+        }else{
+            $this->throwERROE(501,'操作不存在');
+        }
+
+        if($model == ''){
+            $this->throwERROE(502,'目标活动不存在');
+        }
+
+        $model->title = $title;
+        $model->time = $time;
+        $model->content = $content;
+        $model->time = $time;
+        $model->top = $top;
+
+        if($model->save()){
+            $pictures = json_decode($pictures);
+            foreach($pictures as $picture){
+                if($option == 'charity'){
+                    $pic = CharityPic::find($picture);
+                    $pic->cid = $id;
+                    $pic->save();
+
+                }elseif($option == 'activity'){
+                    $pic = ActivityPic::find($picture);
+                    $pic->aid = $id;
+                    $pic->save();
+                }
+            }
+
+            $this->show('ok');
+
+        }else{
+            $this->throwERROE(503,'save_error');
+        }
+
+
+    }
+
 
 
     /**
