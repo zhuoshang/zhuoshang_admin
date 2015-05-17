@@ -68,6 +68,8 @@ Route::post('picUpload',array('before'=>'loginCheck','uses'=>'PicController@picU
 
 Route::get('picDelete',array('before'=>'loginCheck','uses'=>'PicController@picDelete'));
 
+Route::post('debtAdd',array('before'=>'loginCheck','uses'=>'DebtController@debtAdd'));//基金添加
+
 
 #登录验证
 Route::filter('loginCheck', function()
