@@ -24,5 +24,9 @@ class Debt extends Model{
         return $this->hasMany('App\DebtPic','did','id');
     }
 
+    public function proPic(){
+        return $this->hasMany('App\DebtPro','did','id');
+    }
+
 
 }

@@ -70,6 +70,12 @@ Route::get('picDelete',array('before'=>'loginCheck','uses'=>'PicController@picDe
 
 Route::post('debtAdd',array('before'=>'loginCheck','uses'=>'DebtController@debtAdd'));//基金添加
 
+Route::get('debtContent',array('before'=>'loginCheck','uses'=>'DebtController@debtContent'));//按id获取基金
+
+Route::get('debtDelete',array('before'=>'loginCheck','uses'=>'DebtController@debtDelete'));//按id删除基金
+
+Route::post('orderCheck',array('before'=>'loginCheck','uses'=>'informController@orderCheck'));
+
 
 #登录验证
 Route::filter('loginCheck', function()
